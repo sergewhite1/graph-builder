@@ -1,0 +1,9 @@
+1. Define environment variable Qt5DIR. For example:
+export Qt5_DIR="~/Qt/5.15.0/gcc_64/lib/cmake/Qt5"
+
+(in file ~/.bashrc)
+
+2. Go to dir ../graph-builder/script 
+   and run:
+   ./build.sh
+   See result in dir ../graph-builder/out/linux/src/graph-builder
