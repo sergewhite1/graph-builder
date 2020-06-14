@@ -22,6 +22,14 @@ public:
     return graph_model_->step();
   }
 
+  double y_min() const {
+    return graph_model_->y_min();
+  }
+
+  double y_max() const {
+    return graph_model_->y_max();
+  }
+
   const std::string& x_min_str() const {
     return x_min_str_;
   }

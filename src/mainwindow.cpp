@@ -82,17 +82,18 @@ void MainWindow::ShowData() {
     lineSeries_->append(graphViewModel_->x(i), graphViewModel_->y(i));
   }
 
+  std::cout << "x_min       : " << graphViewModel_->x_min() << std::endl;
+  std::cout << "x_max       : " << graphViewModel_->x_max() << std::endl;
+  std::cout << "step        : " << graphViewModel_->step() << std::endl;
+  std::cout << "point count : " << graphViewModel_->pointCount() << std::endl;
+  std::cout << "y_min       : " << graphViewModel_->y_min() << std::endl;
+  std::cout << "y_max       : " << graphViewModel_->y_max() << std::endl;
+
   QList<QtCharts::QAbstractAxis*> hAxes = chart_->axes(Qt::Horizontal, lineSeries_);
-    assert(hAxes.count() == 1);
-    hAxes.first()->setRange(graphViewModel_->x_min(), graphViewModel_->x_max());
+  assert(hAxes.count() == 1);
+  hAxes.first()->setRange(graphViewModel_->x_min(), graphViewModel_->x_max());
 
-   std::cout << "x_min       : " << graphViewModel_->x_min() << std::endl;
-   std::cout << "x_max       : " << graphViewModel_->x_max() << std::endl;
-   std::cout << "step        : " << graphViewModel_->step() << std::endl;
-   std::cout << "point count : " << graphViewModel_->pointCount() << std::endl;
-
-    QList<QtCharts::QAbstractAxis*> vAxes = chart_->axes(Qt::Vertical, lineSeries_);
-    assert(vAxes.count() == 1);
-    vAxes.first()->setRange(0.0, 9.0);
-
+  QList<QtCharts::QAbstractAxis*> vAxes = chart_->axes(Qt::Vertical, lineSeries_);
+  assert(vAxes.count() == 1);
+  vAxes.first()->setRange(graphViewModel_->y_min(), graphViewModel_->y_max());
 }

@@ -21,6 +21,14 @@ public:
     return step_;
   }
 
+  double y_min() const {
+    return y_min_;
+  }
+
+  double y_max() const {
+    return y_max_;
+  }
+
   size_t pointCount() const;
 
   double x(size_t index) const {
@@ -37,6 +45,8 @@ private:
   double x_min_ = -4.0;
   double x_max_ = 4.0;
   double step_ = 0.01;
+  double y_min_ = 0.0;
+  double y_max_ = 0.0;
   std::vector<double> x_;
   std::vector<double> y_;
 };
