@@ -26,7 +26,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #    endif()
 #endif()
 
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Charts Widgets REQUIRED)
 
 if(ANDROID)
   add_library(graph-builder SHARED
@@ -44,4 +44,4 @@ else()
   )
 endif()
 
-target_link_libraries(graph-builder PRIVATE stdc++ Qt5::Widgets)
+target_link_libraries(graph-builder PRIVATE stdc++ Qt5::Charts Qt5::Widgets)
