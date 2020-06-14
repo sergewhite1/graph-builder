@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-message("Qt5_DIR= ${Qt5_DIR}")
+message("ENV Qt5_DIR= $ENV{Qt5_DIR}")
 
 project(graph-builder LANGUAGES CXX)
 
