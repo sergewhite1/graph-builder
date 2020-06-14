@@ -1,22 +1,29 @@
 #include "graph_model.h"
 
+#include <cmath>
 #include <limits>
 
 GraphModel::GraphModel() {
-  Update();
+  update();
 }
 
-size_t GraphModel::pointCount() const {
+size_t GraphModel::point_count() const {
   return static_cast<size_t>((x_max_ - x_min_) / step_);
 }
 
-void GraphModel::Update() {
+void GraphModel::update() {
+
+  if(!need_update_) {
+    return;
+  }
+
+  // clear
   x_.clear();
   y_.clear();
   y_min_ = 0.0;
   y_max_ = 0.0;
 
-  size_t pc = pointCount();
+  size_t pc = point_count();
 
   x_.reserve(pc);
   y_.reserve(pc);
@@ -41,5 +48,16 @@ void GraphModel::Update() {
 
     x_.push_back(x);
     y_.push_back(y);
+  }
+
+  need_update_ = false;
+}
+
+
+void GraphModel::set_x_min(double value) {
+  //TODO: extract wht::same_values
+  if (!(fabs(x_min_ - value) < std::numeric_limits<double>::epsilon())) {
+    x_min_ = value;
+    need_update_ = true;
   }
 }

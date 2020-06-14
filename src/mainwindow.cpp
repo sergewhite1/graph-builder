@@ -39,29 +39,7 @@ MainWindow::MainWindow(std::unique_ptr<GraphViewModel> graphViewModel, QWidget *
 
   ShowData();
 
-  {
-    // Add sample data
- /*
-    const double x_min = -3.0;
-    const double x_max =  3.0;
-    const double step = 0.01;
-    const int point_count = static_cast<int>((x_max - x_min) / step);
-    double x, y;
-    for (int i = 0; i < point_count; ++i) {
-      x = x_min + i * step;
-      y = x * x;
-      lineSeries->append(x, y);
-    }
-
-    QList<QtCharts::QAbstractAxis*> hAxes = chart->axes(Qt::Horizontal, lineSeries);
-    assert(hAxes.count() == 1);
-    hAxes.first()->setRange(x_min, x_max);
-
-    QList<QtCharts::QAbstractAxis*> vAxes = chart->axes(Qt::Vertical, lineSeries);
-    assert(vAxes.count() == 1);
-    vAxes.first()->setRange(0.0, 9.0);
-*/
-  }
+  graphViewModel_->reg_listener(this);
 }
 
 MainWindow::~MainWindow()
@@ -69,31 +47,48 @@ MainWindow::~MainWindow()
   delete ui;
 }
 
-
 void MainWindow::ShowData() {
   ui->lineEditXMin->setText(graphViewModel_->x_min_str().c_str());
   ui->lineEditXMax->setText(graphViewModel_->x_max_str().c_str());
   ui->lineEditStep->setText(graphViewModel_->step_str().c_str());
 
-  // build chart
-  lineSeries_->clear();
-  size_t pointCount = graphViewModel_->pointCount();
-  for (size_t i = 0; i < pointCount; ++i) {
-    lineSeries_->append(graphViewModel_->x(i), graphViewModel_->y(i));
+  ui->pushButtonBuild->setEnabled(graphViewModel_->need_update());
+
+  if (graphViewModel_->need_update() == false) {
+    // build chart
+    lineSeries_->clear();
+    size_t pointCount = graphViewModel_->point_count();
+    for (size_t i = 0; i < pointCount; ++i) {
+      lineSeries_->append(graphViewModel_->x(i), graphViewModel_->y(i));
+    }
+
+    std::cout << "x_min       : " << graphViewModel_->x_min() << std::endl;
+    std::cout << "x_max       : " << graphViewModel_->x_max() << std::endl;
+    std::cout << "step        : " << graphViewModel_->step() << std::endl;
+    std::cout << "point count : " << graphViewModel_->point_count() << std::endl;
+    std::cout << "y_min       : " << graphViewModel_->y_min() << std::endl;
+    std::cout << "y_max       : " << graphViewModel_->y_max() << std::endl;
+
+    QList<QtCharts::QAbstractAxis*> hAxes = chart_->axes(Qt::Horizontal, lineSeries_);
+    assert(hAxes.count() == 1);
+    hAxes.first()->setRange(graphViewModel_->x_min(), graphViewModel_->x_max());
+
+    QList<QtCharts::QAbstractAxis*> vAxes = chart_->axes(Qt::Vertical, lineSeries_);
+    assert(vAxes.count() == 1);
+    vAxes.first()->setRange(graphViewModel_->y_min(), graphViewModel_->y_max());
   }
+}
 
-  std::cout << "x_min       : " << graphViewModel_->x_min() << std::endl;
-  std::cout << "x_max       : " << graphViewModel_->x_max() << std::endl;
-  std::cout << "step        : " << graphViewModel_->step() << std::endl;
-  std::cout << "point count : " << graphViewModel_->pointCount() << std::endl;
-  std::cout << "y_min       : " << graphViewModel_->y_min() << std::endl;
-  std::cout << "y_max       : " << graphViewModel_->y_max() << std::endl;
+void MainWindow::on_lineEditXMin_textEdited(const QString &arg1)
+{
+  graphViewModel_->set_x_min_str(arg1.toStdString());
+}
 
-  QList<QtCharts::QAbstractAxis*> hAxes = chart_->axes(Qt::Horizontal, lineSeries_);
-  assert(hAxes.count() == 1);
-  hAxes.first()->setRange(graphViewModel_->x_min(), graphViewModel_->x_max());
+void MainWindow::wht_listener_on_update() {
+  ShowData();
+}
 
-  QList<QtCharts::QAbstractAxis*> vAxes = chart_->axes(Qt::Vertical, lineSeries_);
-  assert(vAxes.count() == 1);
-  vAxes.first()->setRange(graphViewModel_->y_min(), graphViewModel_->y_max());
+void MainWindow::on_pushButtonBuild_clicked()
+{
+  graphViewModel_->update();
 }

@@ -29,7 +29,7 @@ public:
     return y_max_;
   }
 
-  size_t pointCount() const;
+  size_t point_count() const;
 
   double x(size_t index) const {
     return x_.at(index);
@@ -39,7 +39,13 @@ public:
     return y_.at(index);
   }
 
-  void Update();
+  void set_x_min(double value);
+
+  void update();
+
+  bool need_update() const {
+    return need_update_;
+  }
 
 private:
   double x_min_ = -4.0;
@@ -49,6 +55,7 @@ private:
   double y_max_ = 0.0;
   std::vector<double> x_;
   std::vector<double> y_;
+  bool need_update_ = true;
 };
 
 #endif // ! GRAPH_MODEL_H_

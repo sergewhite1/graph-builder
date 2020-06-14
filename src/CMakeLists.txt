@@ -41,6 +41,9 @@ else()
     model/graph_model.h
     view_model/graph_view_model.cpp
     view_model/graph_view_model.h
+    wht/listener.h
+    wht/observable.cpp
+    wht/observable.h
     main.cpp
     mainwindow.cpp
     mainwindow.h

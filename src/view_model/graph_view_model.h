@@ -4,8 +4,9 @@
 #include <memory>
 
 #include "model/graph_model.h"
+#include "wht/observable.h"
 
-class GraphViewModel {
+class GraphViewModel : public wht::Observable {
 public:
   explicit GraphViewModel(std::unique_ptr<GraphModel> graph_model);
   ~GraphViewModel() = default;
@@ -42,8 +43,8 @@ public:
     return step_str_;
   }
 
-  size_t pointCount() {
-    return graph_model_->pointCount();
+  size_t point_count() {
+    return graph_model_->point_count();
   }
 
   double x(size_t index) {
@@ -54,11 +55,20 @@ public:
     return graph_model_->y(index);
   }
 
+  bool need_update() const {
+    return need_update_;
+  }
+
+  void update();
+
+  void set_x_min_str(const std::string& value);
+
 private:
   std::unique_ptr<GraphModel> graph_model_;
   std::string x_min_str_;
   std::string x_max_str_;
   std::string step_str_;
+  bool need_update_ = true;
 };
 
 #endif // !GRAPH_VIEW_MODEL_H_
