@@ -40,6 +40,7 @@ public:
   }
 
   void set_x_min(double value);
+  void set_x_max(double value);
 
   void update();
 

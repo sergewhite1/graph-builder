@@ -44,6 +44,8 @@ else()
     wht/listener.h
     wht/observable.cpp
     wht/observable.h
+    wht/same_value.h
+    wht/same_value.cpp
     main.cpp
     mainwindow.cpp
     mainwindow.h

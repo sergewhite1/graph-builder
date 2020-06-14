@@ -36,6 +36,8 @@ private slots:
 
   void on_pushButtonBuild_clicked();
 
+  void on_lineEditXMax_textEdited(const QString &arg1);
+
 private:
   Ui::MainWindow *ui;
   std::unique_ptr<GraphViewModel> graphViewModel_;

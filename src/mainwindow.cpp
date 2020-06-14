@@ -92,3 +92,8 @@ void MainWindow::on_pushButtonBuild_clicked()
 {
   graphViewModel_->update();
 }
+
+void MainWindow::on_lineEditXMax_textEdited(const QString &arg1)
+{
+  graphViewModel_->set_x_max_str(arg1.toStdString());
+}

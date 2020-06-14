@@ -1,7 +1,8 @@
 #include "graph_model.h"
 
-#include <cmath>
 #include <limits>
+
+#include "wht/same_value.h"
 
 GraphModel::GraphModel() {
   update();
@@ -53,11 +54,16 @@ void GraphModel::update() {
   need_update_ = false;
 }
 
-
 void GraphModel::set_x_min(double value) {
-  //TODO: extract wht::same_values
-  if (!(fabs(x_min_ - value) < std::numeric_limits<double>::epsilon())) {
+  if (!wht::same_value(x_min_, value)) {
     x_min_ = value;
+    need_update_ = true;
+  }
+}
+
+void GraphModel::set_x_max(double value) {
+  if (!wht::same_value(x_max_, value)) {
+    x_max_ = value;
     need_update_ = true;
   }
 }
