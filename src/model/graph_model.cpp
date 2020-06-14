@@ -67,3 +67,10 @@ void GraphModel::set_x_max(double value) {
     need_update_ = true;
   }
 }
+
+void GraphModel::set_step(double value) {
+  if(!wht::same_value(step_, value)) {
+    step_ = value;
+    need_update_ = true;
+  }
+}

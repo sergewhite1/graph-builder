@@ -63,6 +63,7 @@ public:
 
   void set_x_min_str(const std::string& value);
   void set_x_max_str(const std::string& value);
+  void set_step_str(const std::string& value);
 
 private:
   std::unique_ptr<GraphModel> graph_model_;

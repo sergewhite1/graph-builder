@@ -26,16 +26,24 @@ void GraphViewModel::set_x_max_str(const std::string& value) {
     need_update_ = true;
     notify_listeners();
   }
+}
 
+
+void GraphViewModel::set_step_str(const std::string& value) {
+  if (step_str_ != value) {
+    step_str_ = value;
+    need_update_ = true;
+    notify_listeners();
+  }
 }
 
 void GraphViewModel::update() {
   if (need_update_) {
     graph_model_->set_x_min(std::stod(x_min_str_));
     graph_model_->set_x_max(std::stod(x_max_str_));
+    graph_model_->set_step(std::stod(step_str_));
     graph_model_->update();
     need_update_ = false;
     notify_listeners();
   }
-
 }

@@ -97,3 +97,8 @@ void MainWindow::on_lineEditXMax_textEdited(const QString &arg1)
 {
   graphViewModel_->set_x_max_str(arg1.toStdString());
 }
+
+void MainWindow::on_lineEditStep_textEdited(const QString &arg1)
+{
+  graphViewModel_->set_step_str(arg1.toStdString());
+}
