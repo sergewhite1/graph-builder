@@ -4,9 +4,9 @@
 #include <memory>
 
 #include "model/graph_model.h"
-#include "wht/observable.h"
+#include "wht/listener/listenable.h"
 
-class GraphViewModel : public wht::Observable {
+class GraphViewModel : public wht::Listenable {
 public:
   explicit GraphViewModel(std::unique_ptr<GraphModel> graph_model);
   ~GraphViewModel() = default;

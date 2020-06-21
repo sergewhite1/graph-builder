@@ -41,9 +41,8 @@ else()
     model/graph_model.h
     view_model/graph_view_model.cpp
     view_model/graph_view_model.h
-    wht/listener.h
-    wht/observable.cpp
-    wht/observable.h
+    wht/listener/listenable.cpp
+    wht/listener/listenable.h
     wht/same_value.h
     wht/same_value.cpp
     main.cpp

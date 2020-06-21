@@ -39,7 +39,7 @@ MainWindow::MainWindow(std::unique_ptr<GraphViewModel> graphViewModel, QWidget *
 
   ShowData();
 
-  graphViewModel_->reg_listener(this);
+  graphViewModel_->wht_reg_listener(this);
 }
 
 MainWindow::~MainWindow()
