@@ -1,10 +1,9 @@
-#include "mainwindow.h"
-
 #include <memory>
 
 #include <QApplication>
 
 #include "model/graph_model.h"
+#include "view/mainwindow.h"
 #include "view_model/graph_view_model.h"
 
 int main(int argc, char *argv[])

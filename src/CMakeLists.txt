@@ -29,16 +29,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt5 COMPONENTS Charts Widgets REQUIRED)
 
 if(ANDROID)
-  add_library(graph-builder SHARED
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-  )
+#  add_library(graph-builder SHARED
+#    main.cpp
+#    mainwindow.cpp
+#    mainwindow.h
+#    mainwindow.ui
+#  )
 else()
   add_executable(graph-builder
     model/graph_model.cpp
     model/graph_model.h
+    view/mainwindow.cpp
+    view/mainwindow.h
+    view/mainwindow.ui
     view_model/graph_view_model.cpp
     view_model/graph_view_model.h
     wht/listener/listenable.cpp
@@ -46,9 +49,6 @@ else()
     wht/same_value.h
     wht/same_value.cpp
     main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
   )
 endif()
 
