@@ -1,11 +1,25 @@
 #include <iostream>
 
+#include "wht/listener/listenable.h"
+#include "wht/listener/listener.h"
+
 typedef int (*UnitTestProc)();
 
+class TestListenable : public wht::Listenable {
+};
+
+class TestListener : public wht::Listener {
+public:
+  // wht::Listener interface
+  virtual void wht_listener_on_update() override {
+  }
+};
+
 static int UnitTest1() {
+  TestListenable testListenable;
+  TestListener testListener;
   return 1;
 }
-
 static int UnitTest2() {
   return 1;
 }

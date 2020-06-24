@@ -44,12 +44,11 @@ else()
     view/mainwindow.ui
     view_model/graph_view_model.cpp
     view_model/graph_view_model.h
-    wht/listener/listenable.cpp
-    wht/listener/listenable.h
-    wht/same_value.h
-    wht/same_value.cpp
     main.cpp
+    $<TARGET_OBJECTS:wht>
   )
 endif()
 
 target_link_libraries(graph-builder PRIVATE stdc++ Qt5::Charts Qt5::Widgets)
+
+add_subdirectory(wht)
